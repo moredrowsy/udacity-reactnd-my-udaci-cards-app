@@ -3,8 +3,12 @@
     "name": "udacity-reactnd-my-udaci-cards-app",
     "slug": "udacity-reactnd-my-udaci-cards-app",
     "version": "1.0.0",
+    "sdkVersion": "42.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "notification": {
+      "icon": "./assets/icon.png"
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -13,13 +17,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "org.udacicards.exp",
       "supportsTablet": true
     },
     "android": {
+      "package": "org.udacicards.exp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
