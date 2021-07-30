@@ -48,25 +48,25 @@ npm install
 
 ### Application Setup
 
-- Is the application easy to install and start?
+- ~~Is the application easy to install and start?~~
 
   The application requires only `yarn install` and `yarn start` to install and launch. `npm` can be used in place of `yarn`.
 
-- Does the application include a README with clear installation and launch instructions?
+- ~~Does the application include a README with clear installation and launch instructions?~~
 
   A README is included with the project. The README includes clear instructions for installing and launching the project.
 
 ### Application Functionality
 
-- Is the initial view a Deck List view?
+- ~~Is the initial view a Deck List view?~~
 
   The primary view, seen when the app loads, is a list of created decks which includes the name of each deck and the number of cards.
 
-- Does the Deck List view function correctly?
+- ~~Does the Deck List view function correctly?~~
 
   Pressing on a deck in the list should generate an animation, and the app should route to an individual deck view.
 
-- Does the Individual Deck view display the correct information?
+- ~~Does the Individual Deck view display the correct information?~~
 
   The individual deck view includes (at a minimum):
 
@@ -82,7 +82,7 @@ npm install
 
   Pressing the 'Start a Quiz' or 'Add Card' button properly routes to the correct views for those activities.
 
-- Does the New Question view function correctly?
+- ~~Does the New Question view function correctly?~~
 
   The New Question view includes a form with fields for a question and answer, and a submit button.
 
@@ -106,7 +106,7 @@ npm install
 
   - Both the 'Restart Quiz' and 'Back to Deck' buttons route correctly to their respective views.
 
-- Does the New Deck view work correctly?
+- ~~Does the New Deck view work correctly?~~
 
   The view includes a form for creating a new deck - which should just be an input for the title and a 'Create Deck' button.
 
