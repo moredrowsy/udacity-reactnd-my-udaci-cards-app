@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from '../store/redux';
 import { StyleSheet, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Notifications from 'expo-notifications';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -106,7 +107,15 @@ const StackNavigator = () => (
 
 function App() {
   useEffect(() => {
-    setLocalNotification();
+    // Determines how to handle incoming notifications while app is in foreground
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+      }),
+    });
+    setLocalNotification(true);
   }, []);
 
   return (
