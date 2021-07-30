@@ -35,8 +35,14 @@ function DeckDetails({ deck, dispatch, navigation }) {
   };
 
   const startQuiz = () => {
-    // TODO
-    console.log('startQuiz');
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: 'Quiz',
+        params: {
+          title: title,
+        },
+      })
+    );
   };
 
   if (!deck) {
@@ -82,9 +88,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-around',
+    alignItems: 'stretch',
   },
   btnContainer: {
     marginBottom: 10,
+    alignSelf: 'stretch',
+    marginRight: '25%',
+    marginLeft: '25%',
   },
   btn: {
     backgroundColor: blue,

@@ -58,7 +58,7 @@ function AddDeck({ dispatch }) {
           </View>
         )}
       </View>
-      <View>
+      <View style={styles.btnContainer}>
         <TextButton
           style={styles.btn}
           textStyle={styles.btnText}
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     padding: 10,
   },
+  btnContainer: { alignSelf: 'stretch', marginRight: '25%', marginLeft: '25%' },
   btn: {
     backgroundColor: blue,
     padding: 10,

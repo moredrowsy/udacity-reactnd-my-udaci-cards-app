@@ -14,6 +14,7 @@ import AddCard from './AddCard';
 import AddDeck from './AddDeck';
 import Decks from './Decks';
 import DeckDetails from './DeckDetails';
+import Quiz from './Quiz';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -79,6 +80,14 @@ const StackNavigator = () => (
       component={AddCard}
       options={() => ({
         title: 'Add Card',
+        headerShown: true,
+      })}
+    />
+    <Stack.Screen
+      name='Quiz'
+      component={Quiz}
+      options={() => ({
+        title: 'Quiz',
         headerShown: true,
       })}
     />
