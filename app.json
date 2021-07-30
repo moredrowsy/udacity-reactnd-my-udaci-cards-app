@@ -4,6 +4,7 @@
     "slug": "udacity-reactnd-my-udaci-cards-app",
     "version": "1.0.0",
     "sdkVersion": "42.0.0",
+    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "notification": {
       "icon": "./assets/icon.png"

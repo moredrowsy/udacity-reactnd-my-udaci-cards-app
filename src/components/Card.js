@@ -1,34 +1,103 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { blue, green, red, white } from '../styles/colors';
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, StyleSheet, Text, View } from 'react-native';
+import { black, blue, green, red, white } from '../styles/colors';
 import TextButton from './TextButton';
 
 function Card({ card, onAnswer }) {
   const { answer, question } = card;
-  const [showAnswer, setShowAnswer] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
 
-  const onToggle = () => {
-    setShowAnswer((prev) => !prev);
+  // Flip animation
+  const animatedValue = useRef(new Animated.Value(0)).current;
+  const frontInterpolate = animatedValue.interpolate({
+    inputRange: [0, 180],
+    outputRange: ['0deg', '180deg'],
+  });
+  const backInterpolate = animatedValue.interpolate({
+    inputRange: [0, 180],
+    outputRange: ['180deg', '360deg'],
+  });
+  const frontAnimationStyle = {
+    transform: [{ rotateY: frontInterpolate }],
+  };
+  const backAnimationStyle = {
+    transform: [{ rotateY: backInterpolate }],
+  };
+
+  const onFlip = () => {
+    setIsFlipped((prev) => !prev);
+
+    if (isFlipped) {
+      Animated.spring(animatedValue, {
+        toValue: 0,
+        friction: 8,
+        tension: 10,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.spring(animatedValue, {
+        toValue: 180,
+        friction: 8,
+        tension: 10,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
+
+  const resetFlip = () => {
+    Animated.timing(animatedValue, {
+      toValue: 0,
+      duration: 1,
+      useNativeDriver: true,
+    }).start();
   };
 
   const onCorrect = () => {
-    setShowAnswer(false);
+    setIsFlipped(false);
+    resetFlip();
     onAnswer(true);
   };
 
   const onIncorrect = () => {
-    setShowAnswer(false);
+    setIsFlipped(false);
+    resetFlip();
     onAnswer(false);
   };
 
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.heading}> {showAnswer ? answer : question}</Text>
+        <Animated.View
+          style={[
+            styles.boxWithShadow,
+            styles.flipCard,
+            styles.flipCardBack,
+            backAnimationStyle,
+          ]}
+        >
+          <TextButton
+            style={styles.cardBtn}
+            onPress={onFlip}
+            textStyle={styles.cardText}
+          >
+            {answer}
+          </TextButton>
+        </Animated.View>
+        <Animated.View
+          style={[styles.boxWithShadow, styles.flipCard, frontAnimationStyle]}
+        >
+          <TextButton
+            onPress={onFlip}
+            style={styles.cardBtn}
+            textStyle={styles.cardText}
+          >
+            {question}
+          </TextButton>
+        </Animated.View>
       </View>
       <View>
-        <TextButton onPress={onToggle} textStyle={styles.toggle}>
-          {showAnswer ? 'Question' : 'Answer'}
+        <TextButton onPress={onFlip} textStyle={styles.flipBtnText}>
+          {isFlipped ? 'View Question' : 'View Answer'}
         </TextButton>
       </View>
       <View style={styles.btnContainer}>
@@ -64,13 +133,43 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
   },
-  toggle: {
+  boxWithShadow: {
+    elevation: 5,
+    shadowColor: black,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+  },
+  flipCard: {
+    width: 300,
+    height: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: white,
+    backfaceVisibility: 'hidden',
+  },
+  flipCardBack: {
+    backgroundColor: white,
+    position: 'absolute',
+    top: 0,
+  },
+  flipBtnText: {
     color: red,
     fontSize: 20,
     textAlign: 'center',
     padding: 10,
   },
-
+  cardText: {
+    color: blue,
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 10,
+    textAlign: 'center',
+  },
+  cardBtn: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   btnContainer: { alignSelf: 'stretch', marginRight: '25%', marginLeft: '25%' },
   btn: {
     padding: 10,
