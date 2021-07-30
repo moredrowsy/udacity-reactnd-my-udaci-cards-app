@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import store from '../store/redux';
 import { StyleSheet, View } from 'react-native';
@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { blue, gray, white } from '../styles/colors';
+import { setLocalNotification } from '../utils/notifications';
 import StatusBar from './StatusBar';
 import AddCard from './AddCard';
 import AddDeck from './AddDeck';
@@ -95,6 +96,10 @@ const StackNavigator = () => (
 );
 
 function App() {
+  useEffect(() => {
+    setLocalNotification();
+  }, []);
+
   return (
     <Provider store={store}>
       <View style={styles.container}>

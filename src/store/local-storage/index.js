@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const UDACI_CARDS_STORAGE_KEY = 'UdaciCards:decks';
+const DECK_STORAGE_KEY = 'UdaciCards:decks';
 
 export async function deleteDeck(title) {
   const decks = await getDecks();
@@ -13,13 +13,13 @@ export async function deleteDeck(title) {
 }
 
 export async function getDecks() {
-  const decks = await AsyncStorage.getItem(UDACI_CARDS_STORAGE_KEY);
-  return decks ? JSON.parse(decks) : null;
+  const item = await AsyncStorage.getItem(DECK_STORAGE_KEY);
+  return item ? JSON.parse(item) : null;
 }
 
 export async function getDeck(title) {
-  const decks = await AsyncStorage.getItem(UDACI_CARDS_STORAGE_KEY);
-  return decks ? JSON.parse(decks)[title] : null;
+  const decks = await getDecks();
+  return decks ? decks[title] : null;
 }
 
 export async function saveCardToDeck(title, card) {
@@ -32,7 +32,7 @@ export async function saveCardToDeck(title, card) {
       deck.cards.push(card);
 
       return AsyncStorage.mergeItem(
-        UDACI_CARDS_STORAGE_KEY,
+        DECK_STORAGE_KEY,
         JSON.stringify({
           [deck.title]: deck,
         })
@@ -44,18 +44,18 @@ export async function saveCardToDeck(title, card) {
 }
 
 export function saveDecks(decks) {
-  return AsyncStorage.setItem(UDACI_CARDS_STORAGE_KEY, JSON.stringify(decks));
+  return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
 }
 
-export async function saveDeck(deck = []) {
-  const decks = await AsyncStorage.getItem(UDACI_CARDS_STORAGE_KEY);
+export async function saveDeck(deck) {
+  const decks = await getDecks();
 
-  if (decks && deck.title in JSON.parse(decks)) {
+  if (decks && deck.title in decks) {
     throw new Error('Deck already exists');
   }
 
   return AsyncStorage.mergeItem(
-    UDACI_CARDS_STORAGE_KEY,
+    DECK_STORAGE_KEY,
     JSON.stringify({
       [deck.title]: deck,
     })

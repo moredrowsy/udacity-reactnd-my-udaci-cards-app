@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
 import Card from './Card';
 import { blue, white } from '../styles/colors';
+import {
+  clearLocalNotification,
+  setLocalNotification,
+} from '../utils/notifications';
 import TextButton from './TextButton';
 
 function Quiz({ deck, navigation }) {
@@ -12,6 +16,12 @@ function Quiz({ deck, navigation }) {
   const { cards } = deck;
   const cardsLen = cards.length;
   const currentCard = cards[cardNum];
+
+  useEffect(() => {
+    if (isQuizDone) {
+      clearLocalNotification().then(setLocalNotification);
+    }
+  }, [isQuizDone]);
 
   const onAnswer = (isCorrect) => {
     if (isCorrect) setScore((prev) => prev + 1);
