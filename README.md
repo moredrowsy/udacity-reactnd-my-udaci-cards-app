@@ -78,7 +78,7 @@ npm install
 
   - Option to add a new question to the deck
 
-- Does the Individual Deck view function correctly?
+- ~~Does the Individual Deck view function correctly?~~
 
   Pressing the 'Start a Quiz' or 'Add Card' button properly routes to the correct views for those activities.
 
@@ -88,7 +88,7 @@ npm install
 
   Submitting the form correctly adds the question to the deck.
 
-- Does the Quiz View function correctly?
+- ~~Does the Quiz View function correctly?~~
 
   - The Quiz view starts with a question from the selected deck.
 
@@ -124,10 +124,10 @@ npm install
 
 ### Code Quality
 
-- Is the code well written and reasonably structured?
+- ~~Is the code well written and reasonably structured?~~
 
   Project code uses reasonable naming conventions. Components are written for reuse and use a modular structure.
 
-- Does the code run without errors? Is the code free of warnings that resulted from not following the best practices listed in the documentation, such as using `key` for list items? Is the code formatted properly?
+- ~~Does the code run without errors? Is the code free of warnings that resulted from not following the best practices listed in the documentation, such as using `key` for list items? Is the code formatted properly?~~
 
   There are no build errors when starting the app. There are no errors while using the app. There are no warnings that resulted from not following the best practices listed in the documentation, such as using `key` for list items. All code is functional and formatted properly.
