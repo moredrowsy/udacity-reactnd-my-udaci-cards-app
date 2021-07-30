@@ -7,7 +7,7 @@ function Card({ card, onAnswer }) {
   const { answer, question } = card;
   const [showAnswer, setShowAnswer] = useState(false);
 
-  const onShowAnswer = () => {
+  const onToggle = () => {
     setShowAnswer((prev) => !prev);
   };
 
@@ -24,16 +24,11 @@ function Card({ card, onAnswer }) {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.question}>{question}</Text>
-        <Text></Text>
-        <TextButton
-          onPress={onShowAnswer}
-          textStyle={[
-            styles.answer,
-            showAnswer ? styles.showAnswer : styles.hideAnswer,
-          ]}
-        >
-          {showAnswer ? answer : 'Answer'}
+        <Text style={styles.heading}> {showAnswer ? answer : question}</Text>
+      </View>
+      <View>
+        <TextButton onPress={onToggle} textStyle={styles.toggle}>
+          {showAnswer ? 'Question' : 'Answer'}
         </TextButton>
       </View>
       <View style={styles.btnContainer}>
@@ -63,25 +58,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-  question: {
-    fontSize: 40,
+  heading: {
+    fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     padding: 10,
   },
-  answer: {
+  toggle: {
+    color: red,
     fontSize: 20,
     textAlign: 'center',
     padding: 10,
   },
-  hideAnswer: {
-    color: red,
-    fontWeight: 'bold',
-  },
-  showAnswer: {
-    color: blue,
-    fontWeight: 'normal',
-  },
+
   btnContainer: { alignSelf: 'stretch', marginRight: '25%', marginLeft: '25%' },
   btn: {
     padding: 10,
