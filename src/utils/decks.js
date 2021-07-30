@@ -5,7 +5,7 @@ export function makeCard(question, answer) {
   };
 }
 
-export function makeDeck(title, cards = []) {
+export function makeDeck(title, cards = {}) {
   return {
     title,
     cards,

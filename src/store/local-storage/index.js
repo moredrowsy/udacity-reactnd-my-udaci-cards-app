@@ -2,6 +2,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DECK_STORAGE_KEY = 'UdaciCards:decks';
 
+export async function deleteCardFromDeck(title, question) {
+  const decks = await getDecks();
+
+  if (decks) {
+    const deck = decks[title];
+
+    if (deck && question in deck.cards) {
+      delete deck.cards[question];
+
+      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
+    }
+  }
+}
+
 export async function deleteDeck(title) {
   const decks = await getDecks();
 
@@ -29,14 +43,18 @@ export async function saveCardToDeck(title, card) {
     const deck = decks[title];
 
     if (deck) {
-      deck.cards.push(card);
+      if (!(card.question in deck.cards)) {
+        deck.cards[card.question] = card;
 
-      return AsyncStorage.mergeItem(
-        DECK_STORAGE_KEY,
-        JSON.stringify({
-          [deck.title]: deck,
-        })
-      );
+        return AsyncStorage.mergeItem(
+          DECK_STORAGE_KEY,
+          JSON.stringify({
+            [deck.title]: deck,
+          })
+        );
+      } else {
+        throw new Error('Card question already exists');
+      }
     } else {
       throw new Error('Deck title does not exists');
     }

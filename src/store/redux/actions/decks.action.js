@@ -1,5 +1,6 @@
 import {
   deleteDeck,
+  deleteCardFromDeck,
   getDecks,
   saveCardToDeck,
   saveDeck,
@@ -12,6 +13,7 @@ export const ADD_DECK = 'ADD_DECK';
 export const ADD_DECKS = 'SAVE_DECKS';
 export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const REMOVE_DECK = 'REMOVE_DECK';
+export const REMOVE_CARD_FROM_DECK = 'REMOVE_CARD_FROM_DECK';
 
 // ACTION CREATORS
 export function addCardToDeck(title, card) {
@@ -40,6 +42,14 @@ export function receiveDecks(decks) {
   return {
     type: RECEIVE_DECKS,
     decks,
+  };
+}
+
+export function removeCardFromDeck(title, question) {
+  return {
+    type: REMOVE_CARD_FROM_DECK,
+    title,
+    question,
   };
 }
 
@@ -96,6 +106,18 @@ export const handleReceiveDecks = (onError) => async (dispatch) => {
     if (onError) onError(e.message);
   }
 };
+
+export const handleRemoveCardFromDeck =
+  ({ title, question }, onError) =>
+  async (dispatch) => {
+    try {
+      await deleteCardFromDeck(title, question);
+      if (title) dispatch(removeCardFromDeck(title, question));
+    } catch (e) {
+      console.log('Fail handleRemoveCardFromDeck()', e);
+      if (onError) onError(e.message);
+    }
+  };
 
 export const handleRemoveDeck = (title, onError) => async (dispatch) => {
   try {

@@ -11,33 +11,10 @@ import TextButton from './TextButton';
 function DeckDetails({ deck, dispatch, navigation }) {
   const title = deck && deck.title ? deck.title : '';
 
-  const addCard = () => {
+  const goTo = (name) => {
     navigation.dispatch(
       CommonActions.navigate({
-        name: 'AddCard',
-        params: {
-          title: title,
-        },
-      })
-    );
-  };
-
-  const removeCard = () => {
-    dispatch(handleRemoveDeck(title));
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: 'Decks',
-        params: {
-          title: title,
-        },
-      })
-    );
-  };
-
-  const startQuiz = () => {
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: 'Quiz',
+        name: name,
         params: {
           title: title,
         },
@@ -54,27 +31,39 @@ function DeckDetails({ deck, dispatch, navigation }) {
       <View>
         <View style={styles.btnContainer}>
           <TextButton
-            style={styles.btn}
-            textStyle={styles.btnText}
-            onPress={addCard}
-          >
-            Add Card
-          </TextButton>
-        </View>
-        <View style={styles.btnContainer}>
-          <TextButton
             style={[styles.btn, { backgroundColor: green }]}
             textStyle={styles.btnText}
-            onPress={startQuiz}
+            onPress={() => goTo('Quiz')}
           >
             Start Quiz
           </TextButton>
         </View>
         <View style={styles.btnContainer}>
           <TextButton
+            style={styles.btn}
+            textStyle={styles.btnText}
+            onPress={() => goTo('AddCard')}
+          >
+            Add Card
+          </TextButton>
+        </View>
+        <View style={styles.btnContainer}>
+          <TextButton
+            style={styles.btn}
+            textStyle={styles.btnText}
+            onPress={() => goTo('RemoveCards')}
+          >
+            Remove Cards
+          </TextButton>
+        </View>
+        <View style={styles.btnContainer}>
+          <TextButton
             style={[styles.btn, { backgroundColor: red }]}
             textStyle={styles.btnText}
-            onPress={removeCard}
+            onPress={() => {
+              dispatch(handleRemoveDeck(title));
+              goTo('Decks');
+            }}
           >
             Delete
           </TextButton>

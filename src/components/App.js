@@ -16,6 +16,7 @@ import AddDeck from './AddDeck';
 import Decks from './Decks';
 import DeckDetails from './DeckDetails';
 import Quiz from './Quiz';
+import RemoveCards from './RemoveCards';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -81,6 +82,14 @@ const StackNavigator = () => (
       component={AddCard}
       options={() => ({
         title: 'Add Card',
+        headerShown: true,
+      })}
+    />
+    <Stack.Screen
+      name='RemoveCards'
+      component={RemoveCards}
+      options={() => ({
+        title: 'Remove Cards',
         headerShown: true,
       })}
     />

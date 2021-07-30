@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
-import Card from './Card';
+import QuizCard from './QuizCard';
 import { blue, white } from '../styles/colors';
 import {
   clearLocalNotification,
@@ -13,7 +13,7 @@ function Quiz({ deck, navigation }) {
   const [cardNum, setCardNum] = useState(0);
   const [score, setScore] = useState(0);
   const [isQuizDone, setIsQuizDone] = useState(false);
-  const { cards } = deck;
+  const cards = Object.values(deck.cards);
   const cardsLen = cards.length;
   const currentCard = cards[cardNum];
 
@@ -76,7 +76,7 @@ function Quiz({ deck, navigation }) {
         <Text style={styles.quizProgress}>
           {cardNum + 1} / {cardsLen}
         </Text>
-        <Card card={currentCard} onAnswer={onAnswer} />
+        <QuizCard card={currentCard} onAnswer={onAnswer} />
       </View>
     );
   } else {
