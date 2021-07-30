@@ -4,6 +4,10 @@ Udacity mobile flash cards app for the react native final project
 
 This project only uses functional components
 
+## Showcase
+
+https://user-images.githubusercontent.com/33333969/127719992-66ee5a72-3253-4f66-8bbd-c62a20f24d39.mp4
+
 ## Note
 
 App tested and works on Android Pixel 4a
