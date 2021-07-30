@@ -4,6 +4,10 @@ Udacity mobile flash cards app for the react native final project
 
 This project only uses functional components
 
+## Note
+
+App tested and works on Android Pixel 4a
+
 ## Install
 
 ```bash
@@ -112,11 +116,11 @@ npm install
 
   Pressing the button correctly creates the deck and routes the user to the Individual Deck view for the new deck.
 
-- Does the user receive a notification at a particular time if they haven't studied that day?
+- ~~Does the user receive a notification at a particular time if they haven't studied that day?~~
 
   Logic for notification has been implemented. Notifications are generated at a specific time if the user hasn't completed at least one quiz for that day.
 
-- Does the app function correctly in either Android or iOS?
+- ~~Does the app function correctly in either Android or iOS?~~
 
   The app works correctly in either Android OR iOS devices (or emulator).
 
